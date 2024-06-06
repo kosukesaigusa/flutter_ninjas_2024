@@ -1,0 +1,14 @@
+{
+  "name": "flutter_ninjas_2024",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "PORT=8000 npx @marp-team/marp-cli -s . --theme-set ./styles/*.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@marp-team/marp-cli": "^3.4.0"
+  }
+}
