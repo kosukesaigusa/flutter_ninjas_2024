@@ -30,3 +30,12 @@ section ul,
 ol {
   padding-left: 32px;
 }
+
+.two-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.two-columns > div {
+  flex: 1;
+  padding: 10px;
+}
