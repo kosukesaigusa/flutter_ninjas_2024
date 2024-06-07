@@ -427,6 +427,41 @@ Demo to create Eventarc trigger.
 
 ---
 
+# Raw byte data
+
+```json
+[10, 195, 3, 10, 84, 112, 114, 111, 106, 101, 99, 116, 115, 47, 102, 117, 108, 108, 45, 100, 97, ...]
+```
+
+---
+
+# Parsed JSON
+
+```json
+{
+  "value": {
+    "name": "projects/full-dart-monorepo/databases/(default)/documents/todos/6iGrCr5nJar6NNB8gPog",
+    "fields": {
+      "geopointField": {"geoPointValue": {"latitude": 1.23, "longitude": 4.56}},
+      "doubleField": {"doubleValue": 3.14},
+      "arrayField": {"arrayValue": {"values": [{"stringValue": "hello"}, {"doubleValue": 3.14}]}},
+      "referenceField": {
+        "referenceValue": "projects/full-dart-monorepo/databases/(default)/documents/todos/6iGrCr5nJar6NNB8gPog"
+      },
+      "integerField": {"integerValue": "1"},
+      "mapField": {"mapValue": {"fields": {"message": {"stringValue": "hello"}}}},
+      "nullField": {"nullValue": "NULL_VALUE"},
+      "timestampField": {"timestampValue": "2024-02-03T03:34:56.720Z"},
+      "stringField": {"stringValue": "a"}
+    },
+    "createTime": "2024-02-03T10:58:22.147439Z",
+    "updateTime": "2024-02-03T10:58:22.147439Z"
+  }
+}
+```
+
+---
+
 # dart_firebase_functions package
 
 Trying to develop `dart_firebase_functions` package.
