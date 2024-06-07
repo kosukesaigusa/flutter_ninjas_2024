@@ -450,13 +450,20 @@ Future<void> oncreatetodo(
 
 ---
 
-It may be good to compare to using Node.js one.
+# aaa
+
+<div class="two-columns">
+
+<div>
 
 ```dart
 @OnDocumentUpdated('todos/{todoId}')
 Future<void> onupdatetodo(
   ({String todoId}) params,
-  ({QueryDocumentSnapshot before, QueryDocumentSnapshot after}) snapshot,
+  ({
+    QueryDocumentSnapshot before,
+    QueryDocumentSnapshot after,
+  }) snapshot,
   RequestContext context,
 ) async {
   final todoId = params.todoId;
@@ -465,6 +472,31 @@ Future<void> onupdatetodo(
   // ...
 }
 ```
+
+</div>
+
+<div>
+
+```dart
+@OnDocumentUpdated('todos/{todoId}')
+Future<void> onupdatetodo(
+  ({String todoId}) params,
+  ({
+    QueryDocumentSnapshot before,
+    QueryDocumentSnapshot after,
+  }) snapshot,
+  RequestContext context,
+) async {
+  final todoId = params.todoId;
+  final before = snapshot.before.data();
+  final after = snapshot.after.data();
+  // ...
+}
+```
+
+</div>
+
+</div>
 
 ---
 
