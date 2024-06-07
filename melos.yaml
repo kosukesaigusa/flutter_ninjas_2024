@@ -1,0 +1,36 @@
+name: flutter_ninjas_2024
+
+repository: https://github.com/kosukesaigusa/flutter_ninjas_2024
+
+packages:
+  - packages/**
+
+sdkPath: .fvm/versions/3.19.6
+
+command:
+  bootstrap:
+    environment:
+      sdk: ">=3.0.0 <4.0.0"
+      flutter: ">=3.0.0 <4.0.0"
+    
+scripts:
+  clean:
+    run: melos exec -- "flutter clean"
+
+  pg:
+    run: melos exec -- "flutter pub get"
+
+  clpg:
+    run: melos exec -- "flutter clean && flutter pub get"
+
+  build:
+    run: melos exec -c 1 -- "dart pub run build_runner build -d"
+
+  watch:
+    run: melos exec -- "dart pub run build_runner watch -d"
+
+  analyze:
+    run: melos exec -- "flutter analyze ."
+
+  format:
+    run: melos exec -- "dart format ."
