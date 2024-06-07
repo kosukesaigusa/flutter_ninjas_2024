@@ -13,4 +13,4 @@ COPY --from=build /runtime/ /
 COPY --from=build /app/bin/server /app/bin/
 
 EXPOSE 8080
-ENTRYPOINT ["/app/bin/server"]
+ENTRYPOINT ["/app/bin/server", "--target=hello", "--signature-type=http"]
