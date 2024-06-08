@@ -11,11 +11,27 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const App(),
+      theme: ThemeData(
+        primaryColor: AppColor.primaryBlue,
+        colorScheme:
+            ThemeData().colorScheme.copyWith(primary: AppColor.primaryBlue),
+        scaffoldBackgroundColor: AppColor.backgroundNavy,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: AppColor.backgroundNavy,
+          foregroundColor: AppColor.primaryWhite,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            foregroundColor: AppColor.primaryWhite,
+            backgroundColor: AppColor.primaryBlue,
+            padding: const EdgeInsets.all(16),
+          ),
+        ),
+      ),
       scrollBehavior: const MaterialScrollBehavior().copyWith(
         dragDevices: {
           PointerDeviceKind.mouse,
@@ -109,7 +125,7 @@ class _AppState extends State<App> {
                   return;
                 }
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Canceled participation')),
+                  const SnackBar(content: Text('Canceled participation.')),
                 );
               },
               child: const Text('Cancel participation'),
@@ -119,4 +135,10 @@ class _AppState extends State<App> {
       ),
     );
   }
+}
+
+abstract interface class AppColor {
+  static const primaryBlue = Color(0xFF3ca6d0);
+  static const backgroundNavy = Color(0xFF015699);
+  static const primaryWhite = Color(0xFFFFFFFF);
 }
