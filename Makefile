@@ -2,10 +2,24 @@ include secrets.mk
 
 .PHONY: clean
 
-SERVER_DIR = packages/hello_server
-FUNCTION_TARGET = hello
-REGION = asia-northeast1
+# For packages/hello
+# SERVER_DIR = packages/hello
+# FUNCTION_TARGET = hello
+# FUNCTION_SIGNATURE_TYPE = http
+
+# For packages/hello_server
+# SERVER_DIR = packages/hello_server
+# FUNCTION_TARGET = hello
+# FUNCTION_SIGNATURE_TYPE = cloudevent
+
+# For packages/server
+SERVER_DIR = packages/server
+FUNCTION_TARGET = oncreateparticipant
 FUNCTION_SIGNATURE_TYPE = cloudevent
+EVENT_TYPE = google.cloud.firestore.document.v1.created
+PATH_PATTERN = participants/{participantId}
+
+REGION = asia-northeast1
 MAX_INSTANCE_LIMIT = 1
 MEMORY_LIMIT = 256Mi
 
@@ -33,7 +47,7 @@ deploy-function: build
 		--max-instances $(MAX_INSTANCE_LIMIT) \
 		--memory=$(MEMORY_LIMIT) \
 		--set-env-vars=ENVIRONMENT=production \
-		--set-secrets=PROJECT_ID=PROJECT_ID:latest,CLIENT_ID=CLIENT_ID:latest,CLIENT_EMAIL=CLIENT_EMAIL:latest,PRIVATE_KEY=PRIVATE_KEY:latest,LINE_CHANNEL_ID=LINE_CHANNEL_ID:latest \
+		--set-secrets=PROJECT_ID=PROJECT_ID:latest,CLIENT_ID=CLIENT_ID:latest,CLIENT_EMAIL=CLIENT_EMAIL:latest,PRIVATE_KEY=PRIVATE_KEY:latest:latest \
 		--quiet
 
 deploy-unauthenticated-function: build
@@ -45,7 +59,7 @@ deploy-unauthenticated-function: build
 		--max-instances $(MAX_INSTANCE_LIMIT) \
 		--memory=$(MEMORY_LIMIT) \
 		--set-env-vars=ENVIRONMENT=production \
-		--set-secrets=PROJECT_ID=PROJECT_ID:latest,CLIENT_ID=CLIENT_ID:latest,CLIENT_EMAIL=CLIENT_EMAIL:latest,PRIVATE_KEY=PRIVATE_KEY:latest,LINE_CHANNEL_ID=LINE_CHANNEL_ID:latest \
+		--set-secrets=PROJECT_ID=PROJECT_ID:latest,CLIENT_ID=CLIENT_ID:latest,CLIENT_EMAIL=CLIENT_EMAIL:latest,PRIVATE_KEY=PRIVATE_KEY:latest:latest \
 		--quiet
 
 # https://cloud.google.com/sdk/gcloud/reference/run/services/list
@@ -70,10 +84,10 @@ deploy-trigger:
 	gcloud eventarc triggers create $(FUNCTION_TARGET) \
     --location=$(REGION) \
     --destination-run-service=$(FUNCTION_TARGET) \
-    --event-filters="type=google.cloud.firestore.document.v1.created" \
+    --event-filters="type=$(EVENT_TYPE)" \
     --event-filters="database=(default)" \
     --event-filters="namespace=(default)" \
-    --event-filters-path-pattern="document=todos/{todoId}" \
+    --event-filters-path-pattern="document=$(PATH_PATTERN)" \
     --event-data-content-type="application/protobuf" \
     --service-account="$(EVENT_ARC_SERVICE_ACCOUNT_NAME)@$(PROJECT_ID).iam.gserviceaccount.com" \
 		--project=$(PROJECT_ID)
