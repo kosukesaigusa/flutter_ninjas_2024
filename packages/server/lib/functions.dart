@@ -25,6 +25,8 @@ Future<void> oncreateparticipant(
     return;
   }
 
+  // Wait for 2 seconds for demo.
+  await Future<void>.delayed(const Duration(seconds: 2));
   await messaging.send(
     TokenMessage(
       token: token,

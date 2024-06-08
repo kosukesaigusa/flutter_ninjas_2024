@@ -66,11 +66,9 @@ class _AppState extends State<App> {
       print('User granted permission: ${settings.authorizationStatus}');
       FirebaseMessaging.onMessage.listen((message) {
         print('Got a message whilst in the foreground!');
-        print('Message data: ${message.data}');
-        if (message.notification != null) {
-          print(
-            'Message also contained a notification: ${message.notification}',
-          );
+        final notification = message.notification;
+        if (notification != null) {
+          print('notification title: ${notification.title}');
         }
       });
     }();
@@ -103,10 +101,37 @@ class _AppState extends State<App> {
                 if (token == null || uid == null) {
                   return;
                 }
+                if ((await FirebaseFirestore.instance
+                        .collection('participants')
+                        .doc(uid)
+                        .get())
+                    .exists) {
+                  if (!context.mounted) {
+                    return;
+                  }
+                  ScaffoldMessenger.of(context)
+                    ..removeCurrentSnackBar()
+                    ..showSnackBar(
+                      const SnackBar(
+                        content: Text("You've already joined FlutterNinjas!"),
+                      ),
+                    );
+                  return;
+                }
                 await FirebaseFirestore.instance
                     .collection('participants')
                     .doc(uid)
                     .set({'token': token});
+                if (!context.mounted) {
+                  return;
+                }
+                ScaffoldMessenger.of(context)
+                  ..removeCurrentSnackBar()
+                  ..showSnackBar(
+                    const SnackBar(
+                      content: Text('Joined FlutterNinjas! 🎉'),
+                    ),
+                  );
               },
               child: const Text('Join FlutterNinjas!'),
             ),
@@ -124,9 +149,11 @@ class _AppState extends State<App> {
                 if (!context.mounted) {
                   return;
                 }
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Canceled participation.')),
-                );
+                ScaffoldMessenger.of(context)
+                  ..removeCurrentSnackBar()
+                  ..showSnackBar(
+                    const SnackBar(content: Text('Canceled participation.')),
+                  );
               },
               child: const Text('Cancel participation'),
             ),
