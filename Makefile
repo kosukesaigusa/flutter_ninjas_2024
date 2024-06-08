@@ -47,7 +47,7 @@ deploy-function: build
 		--max-instances $(MAX_INSTANCE_LIMIT) \
 		--memory=$(MEMORY_LIMIT) \
 		--set-env-vars=ENVIRONMENT=production \
-		--set-secrets=PROJECT_ID=PROJECT_ID:latest,CLIENT_ID=CLIENT_ID:latest,CLIENT_EMAIL=CLIENT_EMAIL:latest,PRIVATE_KEY=PRIVATE_KEY:latest:latest \
+		--set-secrets=PROJECT_ID=PROJECT_ID:latest,CLIENT_ID=CLIENT_ID:latest,CLIENT_EMAIL=CLIENT_EMAIL:latest,PRIVATE_KEY=PRIVATE_KEY:latest \
 		--quiet
 
 deploy-unauthenticated-function: build
@@ -59,7 +59,7 @@ deploy-unauthenticated-function: build
 		--max-instances $(MAX_INSTANCE_LIMIT) \
 		--memory=$(MEMORY_LIMIT) \
 		--set-env-vars=ENVIRONMENT=production \
-		--set-secrets=PROJECT_ID=PROJECT_ID:latest,CLIENT_ID=CLIENT_ID:latest,CLIENT_EMAIL=CLIENT_EMAIL:latest,PRIVATE_KEY=PRIVATE_KEY:latest:latest \
+		--set-secrets=PROJECT_ID=PROJECT_ID:latest,CLIENT_ID=CLIENT_ID:latest,CLIENT_EMAIL=CLIENT_EMAIL:latest,PRIVATE_KEY=PRIVATE_KEY:latest \
 		--quiet
 
 # https://cloud.google.com/sdk/gcloud/reference/run/services/list
