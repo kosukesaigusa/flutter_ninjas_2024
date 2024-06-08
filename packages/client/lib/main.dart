@@ -94,6 +94,26 @@ class _AppState extends State<App> {
               },
               child: const Text('Join FlutterNinjas!'),
             ),
+            const SizedBox(height: 32),
+            TextButton(
+              onPressed: () async {
+                final uid = FirebaseAuth.instance.currentUser?.uid;
+                if (uid == null) {
+                  return;
+                }
+                await FirebaseFirestore.instance
+                    .collection('participants')
+                    .doc(uid)
+                    .delete();
+                if (!context.mounted) {
+                  return;
+                }
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Canceled participation')),
+                );
+              },
+              child: const Text('Cancel participation'),
+            ),
           ],
         ),
       ),
