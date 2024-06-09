@@ -477,10 +477,22 @@ Future<void> oncreatetodo(
   QueryDocumentSnapshot snapshot,
   RequestContext context,
 ) async {
+  final todoId = params.todoId;
   final data = snapshot.data();
   final title = data?['title'] as String?;
   // ...
 }
+```
+
+```ts
+export const onCreateTodo = functions
+    .region(`asia-northeast1`)
+    .firestore.document(`todos/{todoId}`)
+    .onCreate(async (snapshot, context) => {
+        const todoId = context.params.todoId
+        const data = snapshot.data()
+        const title = data.title
+    })
 ```
 
 ---
