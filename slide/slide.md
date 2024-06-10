@@ -71,7 +71,7 @@ Kosuke (@kosukesaigusa)
 
 # ![w:72 h:72](assets/flutter_ninjas.png) Demo
 
-Demo to show sample app.
+Let's see sample app!
 
 ---
 
@@ -81,10 +81,17 @@ Demo to show sample app.
 
 ---
 
-# Table of contents
+# Table of Contents
 
 1. ...
 2. ...
+3. ...
+
+---
+
+# Cloud Run
+
+![bg](assets/architecture_cloud_run.png)
 
 ---
 
@@ -132,10 +139,16 @@ Hello, Flutter Ninjas!
 
 # functions_framework package
 
-- Developed in `GoogleCloudPlatform` organization
+![bg](assets/architecture_functions_framework.png)
+
+---
+
+# functions_framework package
+
+- Developed by `GoogleCloudPlatform` organization
 - Provide a framework to write Dart functions and deploy it to Cloud Run, GAE, ...etc
 
-![bg r](assets/functions_framework_card.png)
+![bg](assets/functions_framework_card.png)
 
 ---
 
@@ -248,7 +261,7 @@ Hello, Flutter Ninjas!
 
 # ![w:72 h:72](assets/flutter_ninjas.png) Demo
 
-Demo to run hello function on local.
+Try to run hello function on local machine!
 
 ---
 
@@ -278,9 +291,11 @@ Hello, Flutter Ninjas!
 
 <!-- _class: lead -->
 
-Paste GCP Console Screenshot here.
+![bg](assets/gcp_cloud_run.png)
 
-![bg](assets/explore_full_stack_dart.png)
+---
+
+![bg](assets/architecture_http_function_checked.png)
 
 ---
 
@@ -288,15 +303,26 @@ Paste GCP Console Screenshot here.
 
 # ![w:72 h:72](assets/flutter_ninjas.png) Demo
 
-Demo to deploy hello function to Cloud Run.
+Deploy hello function to Cloud Run!
 
 ---
 
 # dart_firebase_admin package
 
-<style scoped>section { font-size: 32px; }</style>
+![bg](assets/architecture_dart_firebase_admin.png)
 
-Firebase Admin SDK for Dart developed by `invertase` organization:
+---
+
+# dart_firebase_admin package
+
+- Developed by `invertase` organization
+- Remi is the main contributor
+
+![bg](assets/dart_firebase_admin_card.png)
+
+---
+
+# dart_firebase_admin package
 
 ```dart
 final adminApp = FirebaseAdminApp.initializeApp(
@@ -317,11 +343,7 @@ final messaging = Messaging(adminApp);
 
 # dart_firebase_admin package
 
-```dart
-final firestore = Firestore(adminApp);
-final auth = Auth(adminApp);
-final messaging = Messaging(adminApp);
-```
+![bg](assets/architecture_dart_firebase_admin_checked.png)
 
 ---
 
@@ -329,15 +351,13 @@ final messaging = Messaging(adminApp);
 
 # ![w:72 h:72](assets/flutter_ninjas.png) Demo
 
-Demo to send FCM to mobile app from local admin SDK.
+Send FCM to mobile app from local admin SDK!
 
 ---
 
 # Transfer Cloud Firestore event to Cloud Run
 
-![bg](assets/architecture.png)
-
-Paste Eventarc and CloudEvents focused figure here.
+![bg](assets/architecture_eventarc.png)
 
 ---
 
@@ -349,7 +369,13 @@ Paste Eventarc and CloudEvents focused figure here.
 
 ---
 
-# Write CloudEvent triggered Function in Dart
+# Write CloudEvents triggered Function in Dart
+
+![bg](assets/architecture_firestore_triggered_function.png)
+
+---
+
+# Write CloudEvents triggered Function in Dart
 
 Define function with `@CloudFunction()`, and give two parameters:
 
@@ -366,7 +392,7 @@ void oncreateevent(CloudEvent event, RequestContext context)
 
 ---
 
-# Deploy CloudEvent triggered Function to Cloud Run
+# Deploy CloudEvents triggered Function to Cloud Run
 
 <style scoped>h1 { font-size: 48px;} section { font-size: 30px; }</style>
 
@@ -415,7 +441,11 @@ gcloud eventarc triggers create oncreateevent \
 
 <!-- _class: lead -->
 
-GCP Eventarc dashboard screenshots here
+![bg](assets/gcp_eventarc.png)
+
+---
+
+![bg](assets/architecture_firestore_triggered_function_checked.png)
 
 ---
 
@@ -423,7 +453,13 @@ GCP Eventarc dashboard screenshots here
 
 # ![w:72 h:72](assets/flutter_ninjas.png) Demo
 
-Demo to create Eventarc trigger.
+Try to create Eventarc trigger!
+
+---
+
+# How to handle Raw CloudEvents data?
+
+TODO: Show figure to ask how to handle raw CloudEvents data
 
 ---
 
@@ -465,6 +501,8 @@ Demo to create Eventarc trigger.
 # dart_firebase_functions package
 
 Trying to develop `dart_firebase_functions` package.
+
+![bg](assets/dart_firebase_functions_card.png)
 
 ---
 
