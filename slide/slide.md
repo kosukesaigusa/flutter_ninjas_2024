@@ -502,22 +502,22 @@ Node.js SDK provides:
 - Triggered `DocumentSnapshot snapshot`
 
 ```js
-export const onCreateTodo = functions
-    .region(`asia-northeast1`)
-    .firestore.document(`todos/{todoId}`)
-    .onCreate(async (snapshot, context) => {
-        const todoId = context.params.todoId
-        const data = snapshot.data()
-        const title = data.title
-        // ...
-    })
+const onCreateTodo = functions
+  .region(`asia-northeast1`)
+  .firestore.document(`todos/{todoId}`)
+  .onCreate(async (snapshot, context) => {
+    const todoId = context.params.todoId
+    const data = snapshot.data()
+    const title = data.title
+    // ...
+  })
 ```
 
 ---
 
 <!-- _class: lead -->
 
-# ![w:72 h:72](assets/flutter_ninjas.png) Write in Dart?
+# ![w:72 h:72](assets/flutter_ninjas.png) Possible to write in Dart?
 
 ---
 
@@ -555,7 +555,7 @@ Future<void> oncreatetodo(
 <div>
 
 ```js
-export const onCreateTodo = functions
+const onCreateTodo = functions
   .region(`asia-northeast1`)
   .firestore.document(`todos/{todoId}`)
   .onCreate(async (snapshot, context) => {
@@ -601,7 +601,7 @@ Future<void> onupdatetodo(
 <div>
 
 ```js
-export const onUpdateTodo = functions
+const onUpdateTodo = functions
   .region(`asia-northeast1`)
   .firestore.document(`todos/{todoId}`)
   .onUpdate(async (snapshot, context) => {
@@ -619,29 +619,150 @@ export const onUpdateTodo = functions
 
 ---
 
-# Full-Stack Sample
+# onDelete
 
-Show summary of
+<div class="two-columns">
 
-- Flutter code
-- Server-side code
+<div>
 
-written in Dart
+```dart
+@OnDocumentDeleted('todos/{todoId}')
+Future<void> ondeletetodo(
+  ({String todoId}) params,
+  QueryDocumentSnapshot snapshot,
+  RequestContext context,
+) async {
+  final todoId = params.todoId;
+  final data = snapshot.data();
+  final title = data?.title;
+  // ...
+}
+```
+
+</div>
+
+<div>
+
+```js
+const onDeleteTodo = functions
+  .region(`asia-northeast1`)
+  .firestore.document(`todos/{todoId}`)
+  .onUpdate(async (snapshot, context) => {
+    const todoId = context.params.todoId
+    const data = snapshot.data()
+    const title = data.title
+    // ...
+  })
+```
+
+</div>
+
+</div>
 
 ---
 
-# a
+# onWrite
+
+<div class="two-columns">
+
+<div>
+
+```dart
+@OnDocumentUpdated('todos/{todoId}')
+Future<void> onwritetodo(
+  ({String todoId}) params,
+  ({
+    QueryDocumentSnapshot before,
+    QueryDocumentSnapshot after,
+  }) snapshot,
+  RequestContext context,
+) async {
+  final todoId = params.todoId;
+  final before = snapshot.before.data();
+  final after = snapshot.after.data();
+  final newTitle = after.title;
+  // ...
+}
+```
+
+</div>
+
+<div>
+
+```js
+const onWriteTodo = functions
+  .region(`asia-northeast1`)
+  .firestore.document(`todos/{todoId}`)
+  .onWrite(async (snapshot, context) => {
+    const todoId = context.params.todoId
+    const before = snapshot.before.data()
+    const after = snapshot.after.data()
+    const newTitle = after?.title
+    // ...
+  })
+```
+
+</div>
+
+</div>
 
 ---
 
-# a
+# Nested Collection
+
+```dart
+@OnDocumentCreated('foos/{fooId}/bars/{barId}')
+Future<void> oncreatebar(
+  ({String fooId, String barId}) params,
+  QueryDocumentSnapshot snapshot,
+  RequestContext context,
+) async {
+  final fooId = params.fooId;
+  final barId = params.barId;
+  final data = snapshot.data();
+  // ...
+}
+```
 
 ---
 
-# a
+```dart
+@OnDocumentCreated('todos/{todoId}')
+Future<void> oncreatetodo(
+  ({String todoId}) params,
+  QueryDocumentSnapshot snapshot,
+  RequestContext context,
+) async {
+  // ...
+}
+```
+
+Generate code:
+
+```sh
+dart pub run build_runner build -d
+```
 
 ---
 
-# a
+<!-- _class: lead -->
+
+# ![w:72 h:72](assets/flutter_ninjas.png) Final Demo
+
+Let's see sample app's server-side code!
 
 ---
+
+# Summary
+
+- In container, Dart executable can be run (Cloud Run)
+- HTTP and CloudEvents triggered functions are available in Dart, thanks to `functions_framework` package
+- Firebase Admin SDK is available, thanks to `dart_firebase_admin` package
+- Eventarc transfers CloudEvents from Cloud Firestore to Cloud Run
+- `dart_firebase_function` package provides Node.js-like Firebase functions capability in Dart
+
+---
+
+<!-- _class: lead -->
+
+# ![w:72 h:72](assets/flutter_ninjas.png) Thank you
