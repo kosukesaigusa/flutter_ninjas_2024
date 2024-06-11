@@ -459,54 +459,82 @@ Try to create Eventarc trigger!
 
 # How to handle Raw CloudEvents data?
 
-TODO: Show figure to ask how to handle raw CloudEvents data
-
----
-
-# Raw byte data
+Request body comes as `application/protobuf` byte data:
 
 ```json
-[10, 195, 3, 10, 84, 112, 114, 111, 106, 101, 99, 116, 115, 47, 102, 117, 108, 108, 45, 100, 97, ...]
+[10, 195, 3, 10, 84, 112, 114, 111, 106, 101, 99, 116, 115, 47, 102, 117 ...]
 ```
 
 ---
 
-# Parsed JSON
+<style scoped>section { font-size: 28px; }</style>
+
+# How to handle Raw CloudEvents data?
+
+CloudEvents metadata found in header such as:
+
+- Triggered document
+- Triggered event type
 
 ```json
 {
-  "value": {
-    "name": "projects/full-dart-monorepo/databases/(default)/documents/todos/6iGrCr5nJar6NNB8gPog",
-    "fields": {
-      "geopointField": {"geoPointValue": {"latitude": 1.23, "longitude": 4.56}},
-      "doubleField": {"doubleValue": 3.14},
-      "arrayField": {"arrayValue": {"values": [{"stringValue": "hello"}, {"doubleValue": 3.14}]}},
-      "referenceField": {
-        "referenceValue": "projects/full-dart-monorepo/databases/(default)/documents/todos/6iGrCr5nJar6NNB8gPog"
-      },
-      "integerField": {"integerValue": "1"},
-      "mapField": {"mapValue": {"fields": {"message": {"stringValue": "hello"}}}},
-      "nullField": {"nullValue": "NULL_VALUE"},
-      "timestampField": {"timestampValue": "2024-02-03T03:34:56.720Z"},
-      "stringField": {"stringValue": "a"}
-    },
-    "createTime": "2024-02-03T10:58:22.147439Z",
-    "updateTime": "2024-02-03T10:58:22.147439Z"
-  }
+  "ce-dataschema": "https://github.com/googleapis/.../events/cloud/firestore/v1/data.proto",
+  "authorization": "Bearer ...",
+  "ce-subject": "documents/todos/6iGrCr5nJar6NNB8gPog",
+  "ce-source": "//firestore.googleapis.com/.../databases/(default)",
+  "ce-type": "google.cloud.firestore.document.v1.created",
+  "content-type": "application/protobuf",
+  "ce-document": "todos/6iGrCr5nJar6NNB8gPog",
+  "ce-project": "...",
+  ...
 }
 ```
 
 ---
 
+# firebase-functions (Node.js)
+
+<style scoped>section { font-size: 28px; }</style>
+
+Node.js SDK provides:
+
+- Document path parameters from `context.params.documentId`
+- Triggered `DocumentSnapshot snapshot`
+
+```js
+export const onCreateTodo = functions
+    .region(`asia-northeast1`)
+    .firestore.document(`todos/{todoId}`)
+    .onCreate(async (snapshot, context) => {
+        const todoId = context.params.todoId
+        const data = snapshot.data()
+        const title = data.title
+        // ...
+    })
+```
+
+---
+
+<!-- _class: lead -->
+
+# ![w:72 h:72](assets/flutter_ninjas.png) Write in Dart?
+
+---
+
 # dart_firebase_functions package
 
-Trying to develop `dart_firebase_functions` package.
+- ⚠️ Still in early stages
+- Try to provide Node.js-like Firebase functions capability in Dart!
 
 ![bg](assets/dart_firebase_functions_card.png)
 
 ---
 
-It may be good to compare to using Node.js one.
+# onCreate
+
+<div class="two-columns">
+
+<div>
 
 ```dart
 @OnDocumentCreated('todos/{todoId}')
@@ -517,25 +545,34 @@ Future<void> oncreatetodo(
 ) async {
   final todoId = params.todoId;
   final data = snapshot.data();
-  final title = data?['title'] as String?;
+  final title = data?['title'];
   // ...
 }
 ```
 
-```ts
+</div>
+
+<div>
+
+```js
 export const onCreateTodo = functions
-    .region(`asia-northeast1`)
-    .firestore.document(`todos/{todoId}`)
-    .onCreate(async (snapshot, context) => {
-        const todoId = context.params.todoId
-        const data = snapshot.data()
-        const title = data.title
-    })
+  .region(`asia-northeast1`)
+  .firestore.document(`todos/{todoId}`)
+  .onCreate(async (snapshot, context) => {
+    const todoId = context.params.todoId
+    const data = snapshot.data()
+    const title = data.title
+    // ...
+  })
 ```
+
+</div>
+
+</div>
 
 ---
 
-# aaa
+# onUpdate
 
 <div class="two-columns">
 
@@ -554,6 +591,7 @@ Future<void> onupdatetodo(
   final todoId = params.todoId;
   final before = snapshot.before.data();
   final after = snapshot.after.data();
+  final newTitle = after.title;
   // ...
 }
 ```
@@ -562,21 +600,17 @@ Future<void> onupdatetodo(
 
 <div>
 
-```dart
-@OnDocumentUpdated('todos/{todoId}')
-Future<void> onupdatetodo(
-  ({String todoId}) params,
-  ({
-    QueryDocumentSnapshot before,
-    QueryDocumentSnapshot after,
-  }) snapshot,
-  RequestContext context,
-) async {
-  final todoId = params.todoId;
-  final before = snapshot.before.data();
-  final after = snapshot.after.data();
-  // ...
-}
+```js
+export const onUpdateTodo = functions
+  .region(`asia-northeast1`)
+  .firestore.document(`todos/{todoId}`)
+  .onUpdate(async (snapshot, context) => {
+    const todoId = context.params.todoId
+    const before = snapshot.before.data()
+    const after = snapshot.after.data()
+    const newTitle = after.title
+    // ...
+  })
 ```
 
 </div>
