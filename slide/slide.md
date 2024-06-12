@@ -797,15 +797,30 @@ Only the difference is is `signature-type` option, you need to specify `cloudeve
   - to Cloud Run: `oncreateevent`
 
 ```sh
-gcloud eventarc triggers create oncreateevent \
-  --destination-run-service=oncreateevent \
-  --event-filters="type=google.cloud.firestore.document.v1.created" \
-  --event-filters="database=(default)" \
-  --event-filters="namespace=(default)" \
-  --event-filters-path-pattern="document=events/{eventId}" \
-  --event-data-content-type="application/protobuf" \
+gcloud eventarc triggers create oncreateevent \  # Trigger name
+  --destination-run-service=oncreateevent \      # Destination function name
+  --event-filters="type=google.cloud.firestore.document.v1.created" \  # Event type
+  --event-filters="database=(default)" \ 
+  --event-filters="namespace=(default)" \ 
+  --event-filters-path-pattern="document=events/{eventId}" \  # Target path
+  --event-data-content-type="application/protobuf" \ 
   --service-account="your-service-account-name@project-id.iam.gserviceaccount.com"
 ```
+
+<!--
+
+Then, in order to deploy eventarc trigger, you can also use `gcloud` CLI.
+
+The command you will is `gcloud eventarc triggers create`.
+
+And give information such as 
+
+- Trigger name
+- Destination Cloud Run function (service) name
+- Event type
+- Target path
+
+-->
 
 ---
 
@@ -813,9 +828,13 @@ gcloud eventarc triggers create oncreateevent \
 
 ![bg](assets/gcp_eventarc.png)
 
----
+<!--
 
-![bg](assets/architecture_firestore_triggered_function_checked.png)
+When the trigger is successfully deployed, you can find detailed information in GCP console.
+
+Information on the screenshot is corresponding to what we gave to the `gcloud` command.
+
+-->
 
 ---
 
@@ -827,13 +846,35 @@ Try to create Eventarc trigger!
 
 ---
 
+![bg](assets/architecture_firestore_triggered_function_checked.png)
+
+<!--
+
+So, now we've learned about Eventarc and how to transfer events from Cloud Firestore to Cloud Run function written in Dart.
+
+We've already known about how to build Flutter app in Dart, and just use Firebase Client SDK to use Cloud Firestore, so we've learned almost everything we need to know about.
+
+But...
+
+-->
+
+---
+
 # How to handle Raw CloudEvents data?
 
-Request body comes as `application/protobuf` byte data:
+Request body is in `application/protobuf` byte data format:
 
 ```json
 [10, 195, 3, 10, 84, 112, 114, 111, 106, 101, 99, 116, 115, 47, 102, 117 ...]
 ```
+
+<!--
+
+The request body comes to Cloud Run function, is in `application/protobuf` byte data format, like you see on the screen.
+
+So, we need to somehow prase the byte data.
+
+-->
 
 ---
 
@@ -860,6 +901,16 @@ CloudEvents metadata found in header such as:
 }
 ```
 
+<!--
+
+And also the request header is a little complicated.
+
+The JSON is simplified for explanation, but it includes various metadata
+
+such as triggered document and triggered event type.
+
+-->
+
 ---
 
 # firebase-functions (Node.js)
@@ -872,6 +923,8 @@ Node.js SDK provides:
 - Triggered `DocumentSnapshot snapshot`
 
 ```js
+import * as functions from 'firebase-functions'
+
 const onCreateTodo = functions
   .region(`asia-northeast1`)
   .firestore.document(`todos/{todoId}`)
@@ -883,20 +936,52 @@ const onCreateTodo = functions
   })
 ```
 
+<!--
+
+When it comes to Node.js firebase-function package,
+
+Probably some of you have used them, but
+
+in such an easy way, 
+
+they enable us to instantly use documentId from `context.params`,
+
+and also the provide triggered `DocumentSnapshot` data.
+
+-->
+
 ---
 
 <!-- _class: lead -->
 
 # ![w:72 h:72](assets/flutter_ninjas.png) Possible to write in Dart?
 
+<!--
+
+Is is possible in Dart?
+
+So I tried to make it possible in Dart!
+
+-->
+
 ---
 
 # dart_firebase_functions package
 
 - ⚠️ Still in early stages
-- Try to provide Node.js-like Firebase functions capability in Dart!
+- Provides Node.js-like Firebase functions capability in Dart!
 
 ![bg](assets/dart_firebase_functions_card.png)
+
+<!--
+
+It's dart_firebase_functions package.
+
+Still in early stages, but I tried to develop and published it recently.
+
+This package provides Node.js-like Firebase functions capability in Dart!
+
+-->
 
 ---
 
@@ -940,6 +1025,18 @@ const onCreateTodo = functions
 
 </div>
 
+<!--
+
+Let's see and example how to write `onCreate` trigger, comparing to Node.js one.
+
+For now, we need use `OnDocumentCreated` annotation and code generation before installing concept of Macro, but they look very similar to each other.
+
+In Dart function as well, you can get document ID from the `Record` typed params,
+
+and triggered `DocumentSnapshot` from the function parameter.
+
+-->
+
 ---
 
 # onUpdate
@@ -982,6 +1079,12 @@ const onUpdateTodo = functions
     // ...
   })
 ```
+
+<!--
+
+For onUpdate trigger, you can get `before` and `after` data from the `DocumentSnapshot` in the exactly same way as the Node.js one.
+
+-->
 
 </div>
 
@@ -1028,6 +1131,12 @@ const onDeleteTodo = functions
 </div>
 
 </div>
+
+<!--
+
+On delete, ...
+
+-->
 
 ---
 
@@ -1076,6 +1185,12 @@ const onWriteTodo = functions
 
 </div>
 
+<!--
+
+And on write trigger as well!
+
+-->
+
 ---
 
 # Nested Collection
@@ -1094,7 +1209,15 @@ Future<void> oncreatebar(
 }
 ```
 
+<!--
+
+And of course, it is compatible to parse nested collection path like this.
+
+-->
+
 ---
+
+Write Firestore triggered function in Dart:
 
 ```dart
 @OnDocumentCreated('todos/{todoId}')
@@ -1113,6 +1236,49 @@ Generate code:
 dart pub run build_runner build -d
 ```
 
+<!--
+
+Usage is simple, we are finally able to write Firestore triggered function in Dart, 
+
+by using dart_firebase_function package, which depends on functions_framework package inside,
+
+and or course, you can use any Firebase Admin feature by dart_firebase_admin package in the function,
+
+And generate code by build_runner
+
+-->
+
+---
+
+# Deploy it on Cloud Run
+
+<style scoped>section { font-size: 30px; }</style>
+
+Set `--signature-type=cloudevent` to `ENTRYPOINT` option:
+
+```Dockerfile
+FROM dart:stable AS build
+
+WORKDIR /app
+COPY . .
+RUN dart pub get
+RUN dart pub run build_runner build -d
+RUN dart compile exe bin/server.dart -o bin/server
+
+FROM scratch
+COPY --from=build /runtime/ /
+COPY --from=build /app/bin/server /app/bin/
+
+EXPOSE 8080
+ENTRYPOINT ["/app/bin/server", "--target=oncreateevent", "--signature-type=cloudevent"]
+```
+
+<!--
+
+And the Dockerfile for deployment is complete the same as we saw before!
+
+-->
+
 ---
 
 <!-- _class: lead -->
@@ -1120,6 +1286,12 @@ dart pub run build_runner build -d
 # ![w:72 h:72](assets/flutter_ninjas.png) Final Demo
 
 Let's see sample app's server-side code!
+
+<!--
+
+As final demo, let's see the sample app's server-side code together!
+
+-->
 
 ---
 
@@ -1130,6 +1302,24 @@ Let's see sample app's server-side code!
 - Firebase Admin SDK is available, thanks to `dart_firebase_admin` package
 - Eventarc transfers CloudEvents from Cloud Firestore to Cloud Run
 - `dart_firebase_function` package provides Node.js-like Firebase functions capability in Dart
+
+<!--
+
+So let's summarize this session, important points are here:
+
+-->
+
+---
+
+# Explore Full-Stack Dart
+
+![bg](assets/explore_full_stack_dart.png)
+
+<!--
+
+Thank you so much for exploring Full-Stack Dart for Firebase server-side processing!
+
+-->
 
 ---
 
