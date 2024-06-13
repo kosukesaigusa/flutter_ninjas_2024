@@ -51,6 +51,7 @@ node_modules/
 
 # Secrets
 secrets.mk
+test.http
 
 # FVM Version Cache
 .fvm/

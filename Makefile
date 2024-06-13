@@ -2,11 +2,6 @@ include secrets.mk
 
 .PHONY: clean
 
-# For packages/hello
-# SERVER_DIR = packages/hello
-# FUNCTION_TARGET = hello
-# FUNCTION_SIGNATURE_TYPE = http
-
 # For packages/hello_server
 # SERVER_DIR = packages/hello_server
 # FUNCTION_TARGET = hello
