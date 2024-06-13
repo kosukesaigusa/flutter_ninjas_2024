@@ -3,8 +3,8 @@ import 'package:dart_firebase_admin/messaging.dart';
 import 'config/config.dart';
 
 void main(List<String> args) async {
-  const title = 'Hello, Flutter Ninjas!';
-  const body = 'Hello!';
+  const title = 'FCM test by dart_firebase_admin!';
+  const body = 'Hello from Demo!';
   final messaging = Messaging(adminApp);
   final token = args.first;
   final messageId = await messaging.send(
