@@ -55,11 +55,13 @@ I'm really happy to be here, and meet all of you from different places all over 
     - geoflutterfire_plus
     - flutterfire_gen
     - ...
-  - Hold & Speak at tech conferences in Japan
+  - Hold & Speak at Tech Conferences in Japan
 
 <!-- 
 
 So first, let me briefly introduce myself.
+
+I'm Kosuke.
 
 I'm an application engineer, living in Tokyo.
 
@@ -69,7 +71,7 @@ and have been keeping trying to contribute to the community,
 
 by publishing several packages to pub.dev,
 
-and hold or speak at tech-conferences like today!
+and hold or speak at tech conferences like today!
 
 -->
 
@@ -121,7 +123,7 @@ utilizing various GCP services.
 
 <!-- 
 
-In this session, we'll explore ull-Stack Dart for Firebase Server-Side Development.
+In this session, we'll explore Full-Stack Dart for Firebase Server-Side Development.
 
 And, we will learn
 
@@ -507,7 +509,7 @@ You can find deployed function on GCP Cloud Run console.
 
 # ![w:72 h:72](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/flutter_ninjas.png) Demo
 
-Deploy hello function to Cloud Run!
+Deploy `hello` function to Cloud Run!
 
 ---
 
@@ -834,7 +836,7 @@ Information on the screenshot is corresponding to what we gave to the `gcloud` c
 
 # ![w:72 h:72](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/flutter_ninjas.png) Demo
 
-Try to create Eventarc trigger!
+Deploy Eventarc trigger!
 
 ---
 
