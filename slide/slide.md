@@ -4,15 +4,14 @@ theme: base
 _class: lead
 paginate: true
 backgroundColor: fff
-# backgroundImage: url('https://marp.app/assets/hero-background.svg')
-backgroundImage: url('./assets/background.svg')
+backgroundImage: url('https://cdn.kosukesaigusa.com/flutter-ninjas/assets/background.svg')
 header: "**FlutterNinjas 2024**"
 footer: kosukesaigusa
 ---
 
-![bg left:40% 80%](assets/kosukesaigusa.jpg)
+![bg left:40% 80%](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/kosukesaigusa.jpg)
 
-# **FlutterNinjas 2024** ![w:48 h:48](assets/flutter_ninjas.png)
+# **FlutterNinjas 2024** ![w:48 h:48](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/flutter_ninjas.png)
 
 **Exploring Full-Stack Dart for Firebase Server-Side Development**
 
@@ -32,7 +31,7 @@ Now, I'll be presenting on "Exploring Full-Stack Dart for Firebase Server-Side D
 
 <!-- _class: lead -->
 
-# ![w:72 h:72](assets/flutter_ninjas.png) Hello, Flutter Ninjas! 💙
+# ![w:72 h:72](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/flutter_ninjas.png) Hello, Flutter Ninjas! 💙
 
 <!-- 
 
@@ -52,7 +51,7 @@ Thank you so much, our organizer Kei and other staffs, for holding such a wonder
 
 <style scoped>section { font-size: 30px; }</style>
 
-![bg left:40% 80%](assets/kosukesaigusa.jpg)
+![bg left:40% 80%](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/kosukesaigusa.jpg)
 
 - Kosuke Saigusa (@kosukesaigusa)
 - 🇯🇵 Application Engineer located in Japan
@@ -89,7 +88,7 @@ or speak at tech-conferences like today!
 
 # Explore Full-Stack Dart
 
-![bg](assets/explore_full_stack_dart.png)
+![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/explore_full_stack_dart.png)
 
 <!-- 
 
@@ -145,7 +144,7 @@ So, we will learn
 
 <!-- _class: lead -->
 
-# ![w:72 h:72](assets/flutter_ninjas.png) First Demo
+# ![w:72 h:72](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/flutter_ninjas.png) First Demo
 
 Let's see sample app!
 
@@ -153,7 +152,7 @@ Let's see sample app!
 
 # Overview
 
-![bg](assets/architecture.png)
+![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture.png)
 
 <!-- 
 
@@ -191,7 +190,7 @@ and we would be able to build server-side processing for Firebase in Dart.
 
 # Cloud Run
 
-![bg](assets/architecture_cloud_run.png)
+![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture_cloud_run.png)
 
 <!-- 
 
@@ -203,7 +202,7 @@ First, let's learn about Cloud Run.
 
 # Cloud Run
 
-![bg right:40% 80%](assets/cloud_run.svg)
+![bg right:40% 80%](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/cloud_run.svg)
 
 > Cloud Run is a managed compute platform that lets you run containers directly on top of Google's scalable infrastructure.
 >
@@ -268,7 +267,7 @@ And you can run the executable like this.
 
 # functions_framework package
 
-![bg](assets/architecture_functions_framework.png)
+![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture_functions_framework.png)
 
 <!--
 
@@ -283,7 +282,7 @@ Next, lets' see functions_framework package.
 - Developed by `GoogleCloudPlatform` organization
 - Provides a framework to write Dart functions and deploy it on Cloud Run, GAE, ...etc
 
-![bg](assets/functions_framework_card.png)
+![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/functions_framework_card.png)
 
 <!--
 
@@ -464,7 +463,7 @@ And when you make request to the server, it should return successful response!
 
 <!-- _class: lead -->
 
-# ![w:72 h:72](assets/flutter_ninjas.png) Demo
+# ![w:72 h:72](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/flutter_ninjas.png) Demo
 
 Try to run hello function on local machine!
 
@@ -511,7 +510,7 @@ After deployment completes, of course you can request to deployed function!
 
 <!-- _class: lead -->
 
-![bg](assets/gcp_cloud_run.png)
+![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/gcp_cloud_run.png)
 
 <!--
 
@@ -521,7 +520,7 @@ You can find deployed function on GCP Cloud Run console.
 
 ---
 
-![bg](assets/architecture_http_function_checked.png)
+![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture_http_function_checked.png)
 
 <!--
 
@@ -537,7 +536,7 @@ and how to deploy them on Cloud Run!
 
 <!-- _class: lead -->
 
-# ![w:72 h:72](assets/flutter_ninjas.png) Demo
+# ![w:72 h:72](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/flutter_ninjas.png) Demo
 
 Deploy hello function to Cloud Run!
 
@@ -545,7 +544,7 @@ Deploy hello function to Cloud Run!
 
 # dart_firebase_admin package
 
-![bg](assets/architecture_dart_firebase_admin.png)
+![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture_dart_firebase_admin.png)
 
 <!--
 
@@ -560,7 +559,7 @@ As next step, let me introduce another important package dart_firebase_admin
 - Developed by `invertase` organization
 - Remi is the main contributor
 
-![bg](assets/dart_firebase_admin_card.png)
+![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/dart_firebase_admin_card.png)
 
 <!--
 
@@ -630,7 +629,7 @@ sending Cloud Messaging is available in Dart!
 
 # dart_firebase_admin package
 
-![bg](assets/architecture_dart_firebase_admin_checked.png)
+![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture_dart_firebase_admin_checked.png)
 
 <!--
 
@@ -642,7 +641,7 @@ We've learned the usage of dart_firebase_admin package.
 
 <!-- _class: lead -->
 
-# ![w:72 h:72](assets/flutter_ninjas.png) Demo
+# ![w:72 h:72](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/flutter_ninjas.png) Demo
 
 Send FCM to mobile app from local admin SDK!
 
@@ -650,7 +649,7 @@ Send FCM to mobile app from local admin SDK!
 
 # Transfer Cloud Firestore event to Cloud Run
 
-![bg](assets/architecture_eventarc.png)
+![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture_eventarc.png)
 
 <!--
 
@@ -668,7 +667,7 @@ by using GCP Eventarc service.
 
 # Eventarc
 
-![bg right:40% 80%](assets/eventarc.svg)
+![bg right:40% 80%](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/eventarc.svg)
 
 > Eventarc lets you build **event-driven architectures** without having to implement, customize, or maintain the underlying infrastructure. **Eventarc offers a standardized solution to manage the flow of state changes, called events, between decoupled microservices.**
 
@@ -690,7 +689,7 @@ This is how we realize Cloud Firestore triggered function.
 
 # CloudEvents
 
-![bg right:40% 80%](assets/cloudevents.png)
+![bg right:40% 80%](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/cloudevents.png)
 
 > **CloudEvents is a specification for describing event data in a common way**.
 >
@@ -708,7 +707,7 @@ and its CloudEvents is a common specification to describe such event data.
 
 # Write CloudEvents triggered Function in Dart
 
-![bg](assets/architecture_firestore_triggered_function.png)
+![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture_firestore_triggered_function.png)
 
 <!--
 
@@ -826,7 +825,7 @@ And give information such as
 
 <!-- _class: lead -->
 
-![bg](assets/gcp_eventarc.png)
+![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/gcp_eventarc.png)
 
 <!--
 
@@ -840,13 +839,13 @@ Information on the screenshot is corresponding to what we gave to the `gcloud` c
 
 <!-- _class: lead -->
 
-# ![w:72 h:72](assets/flutter_ninjas.png) Demo
+# ![w:72 h:72](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/flutter_ninjas.png) Demo
 
 Try to create Eventarc trigger!
 
 ---
 
-![bg](assets/architecture_firestore_triggered_function_checked.png)
+![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture_firestore_triggered_function_checked.png)
 
 <!--
 
@@ -954,7 +953,7 @@ and also the provide triggered `DocumentSnapshot` data.
 
 <!-- _class: lead -->
 
-# ![w:72 h:72](assets/flutter_ninjas.png) Possible to write in Dart?
+# ![w:72 h:72](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/flutter_ninjas.png) Possible to write in Dart?
 
 <!--
 
@@ -971,7 +970,7 @@ So I tried to make it possible in Dart!
 - ⚠️ Still in early stages
 - Provides Node.js-like Firebase functions capability in Dart!
 
-![bg](assets/dart_firebase_functions_card.png)
+![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/dart_firebase_functions_card.png)
 
 <!--
 
@@ -1283,7 +1282,7 @@ And the Dockerfile for deployment is complete the same as we saw before!
 
 <!-- _class: lead -->
 
-# ![w:72 h:72](assets/flutter_ninjas.png) Final Demo
+# ![w:72 h:72](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/flutter_ninjas.png) Final Demo
 
 Let's see sample app's server-side code!
 
@@ -1313,7 +1312,7 @@ So let's summarize this session, important points are here:
 
 # Explore Full-Stack Dart
 
-![bg](assets/explore_full_stack_dart.png)
+![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/explore_full_stack_dart.png)
 
 <!--
 
@@ -1325,4 +1324,4 @@ Thank you so much for exploring Full-Stack Dart for Firebase server-side process
 
 <!-- _class: lead -->
 
-# ![w:72 h:72](assets/flutter_ninjas.png) Thank you
+# ![w:72 h:72](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/flutter_ninjas.png) Thank you
