@@ -5,7 +5,7 @@ include secrets.mk
 # For packages/hello_server
 # SERVER_DIR = packages/hello_server
 # FUNCTION_TARGET = hello
-# FUNCTION_SIGNATURE_TYPE = cloudevent
+# FUNCTION_SIGNATURE_TYPE = http
 
 # For packages/server
 SERVER_DIR = packages/server
