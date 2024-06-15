@@ -17,27 +17,9 @@ footer: kosukesaigusa
 
 Kosuke (@kosukesaigusa)
 
-<!-- 
-
-Let's get started.
-
-Now, I'll be presenting on "Exploring Full-Stack Dart for Firebase Server-Side Development."
-
--->
-
----
-
 <!-- _class: lead -->
 
 # ![w:72 h:72](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/flutter_ninjas.png) Hello, Flutter Ninjas! 💙 🌍 🇯🇵
-
-<!-- 
-
-Hello Flutter Ninjas from all over the world!
-
-I'm really happy to be here, and meet all of you from different places all over the world!
-
--->
 
 ---
 
@@ -57,57 +39,11 @@ I'm really happy to be here, and meet all of you from different places all over 
     - ...
   - Hold & Speak at Tech Conferences in Japan
 
-<!-- 
-
-So first, let me briefly introduce myself.
-
-I'm Kosuke.
-
-I'm an application engineer, living in Tokyo.
-
-The reason why I'm here is, I'm an Flutter & Dart lover, 
-
-and have been keeping trying to contribute to the community,
-
-by publishing several packages to pub.dev,
-
-and hold or speak at tech conferences like today!
-
--->
-
 ---
 
 # Explore Full-Stack Dart
 
 ![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/explore_full_stack_dart.png)
-
-<!-- 
-
-Let's move on to the today's topic.
-
-We, all Flutter Engineers, no Flutter Ninjas love Flutter, and its programming language Dart as Well.
-
-As you know well, Flutter framework enables us to build cross-platform apps swiftly with just Dart.
-
-This is simple, but the one of the strongest reason why we love Flutter and Dart.
-
-And we saw the 4th flame logo in yesterday's session? It's a recently renewed Firebase logo.
-
-We also have FlutterFire community, which enables us to effortlessly utilize features like databases, authentication, and push notifications,
-
-without server-side development.
-
-However, sometimes we need to write our own server-side processing by ourselves.
-
-In that case, we write Cloud Functions, then unfortunately, Dart is left out of the picture.
-
-So in this session, we'd like to explore possibility of Full-Stack Dart 
-
-focusing of Firebase server-side processing, 
-
-utilizing various GCP services.
-
--->
 
 ---
 
@@ -120,18 +56,6 @@ utilizing various GCP services.
 - Implement solutions with pub.dev packages:
   - `functions_framework`
   - `dart_firebase_admin`
-
-<!-- 
-
-In this session, we'll explore Full-Stack Dart for Firebase Server-Side Development.
-
-And, we will learn
-
-- How to Develop server-side processes for Firebase using Dart
-- How to integrate various GCP sevices
-- How to implement functions with pub.dev packages such as `functions_framework` and `dart_firebase_admin`.
-
--->
 
 ---
 
@@ -147,41 +71,11 @@ Let's see sample app!
 
 ![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture.png)
 
-<!-- 
-
-Let's see overview.
-
-This figure shows the architecture, the sample app and today's session include.
-
-Of course, the client app is made by Flutter and written in Dart,
-
-the client app can connect to Cloud Firestore via Firebase Client SDK,
-
-and also can make HTTP request to HTTP Function deployed on Cloud Run.
-
-Events occurred in Cloud Firestore are transferred to Firestore triggered function also deploy on Cloud Run, 
-
-through Eventarc as CloudEvents format.
-
-We try to write functions both in Dart, using two pub.dev packages.
-
-Through the session, let't have a look at each component step by step,
-
-and we would be able to build server-side processing for Firebase in Dart.
-
--->
-
 ---
 
 # Cloud Run
 
 ![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture_cloud_run.png)
-
-<!-- 
-
-First, let's learn about Cloud Run.
-
--->
 
 ---
 
@@ -192,22 +86,6 @@ First, let's learn about Cloud Run.
 > Cloud Run is a managed compute platform that lets you run containers directly on top of Google's scalable infrastructure.
 >
 > You can deploy code **written in any programming language on Cloud Run if you can build a container image** from it.
-
-<!--
-
-This is the citation from Cloud Run document.
-
-The important point is displayed in bold,
-
-we can deploy code written in any programming language on Cloud Run
-
-if it is possible to build its container image.
-
-It means, it is possible to deploy and run function written in Dart by using container environment.
-
-And probably some of you have heard that 2nd Gen Cloud Functions are run on Cloud Run inside.
-
--->
 
 ---
 
@@ -236,29 +114,11 @@ $ ./bin/hello
 Hello, Flutter Ninjas!
 ```
 
-<!--
-
-Once, apart from Cloud Run, let's learn it is possible to compile Dart program to an executable.
-
-Here is the very simple Dart command-line app just print "Hello, Flutter Ninjas!".
-
-by using dart compile E-X-E command, you will get an executable.
-
-And you can run the executable like this.
-
--->
-
 ---
 
 # functions_framework package
 
 ![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture_functions_framework.png)
-
-<!--
-
-Next, lets' see functions_framework package.
-
--->
 
 ---
 
@@ -268,16 +128,6 @@ Next, lets' see functions_framework package.
 - Provides a framework to write Dart functions and deploy it on Cloud Run, GAE, ...etc
 
 ![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/functions_framework_card.png)
-
-<!--
-
-functions_framework package is developed by GoogleCloudPlatform organization,
-
-and it provides a framework to write Dart functions aimed at deploying them on GCP platforms
-
-such as Cloud Run, or GAE.
-
--->
 
 ---
 
@@ -299,16 +149,6 @@ Generate code:
 dart pub run build_runner build -d
 ```
 
-<!--
-
-By using functions_framework package, you can easily define HTTP Function with `@CloudFunction` annotation.
-
-Here, hello function, which simply returns success response with the message, saying "Hello, Flutter Ninjas!".
-
-And generate code with build_runner.
-
--->
-
 ---
 
 Generated code `bin/server.dart`:
@@ -327,16 +167,6 @@ FunctionTarget? _nameToFunctionTarget(String name) => switch (name) {
     };
 ```
 
-<!--
-
-You can find the generated code in `bin/server.dart`.
-
-It gives function entry point as main function with the arguments,
-
-In the switch expression, if the target function name is equal to hello, it calls hello function.
-
--->
-
 ---
 
 Launch server:
@@ -352,14 +182,6 @@ Request to server:
 $ curl http://localhost:8080
 Hello, Flutter Ninjas!
 ```
-
-<!--
-
-By running `dart run` command, you can launch the server locally on your machine.
-
-And when you make request to the local server, it responses with "Hello, Flutter Ninjas!" message.
-
--->
 
 ---
 
@@ -388,30 +210,6 @@ EXPOSE 8080
 ENTRYPOINT ["/app/bin/server", "--target=hello", "--signature-type=http"]
 ```
 
-<!--
-
-You can run the same function in container environment as well.
-
-This is Dockerfile to build the container.
-
-In the build step, 
-
-- Copy the whole source codes
-- Install dependencies by running `dart pub get`
-- Generate codes by build_runner
-- Then, compile Dart script to an executable
-
-And next, in the scratch step,
-
-- Copy the compiled executable file and place it to the right place
-- Expose 8080 PORT
-- And define ENTRYPOINT, with options such as
-  - Path to the executable file
-  - The target function name
-  - and function signature type, in this case, specify http because it's HTTP function
-
--->
-
 ---
 
 Build container:
@@ -433,14 +231,6 @@ Request to server:
 $ curl http://localhost:8080
 Hello, Flutter Ninjas!
 ```
-
-<!--
-
-You can build and run docker container by `docker build` and `docker run` commands.
-
-And when you make request to the server, it should return successful response!
-
--->
 
 ---
 
@@ -474,34 +264,11 @@ Hello, Flutter Ninjas!
 
 ⚠️ Be careful of unauthenticated functions.
 
-<!--
-
-As last step about Cloud Run, 
-
-we need to learn how to deploy the function on Cloud Run.
-
-But don't worry, it's simple, just use `gcloud` CLI.
-
-In order to deploy HTTP function on Cloud Run, run `gcloud run deploy` command with
-
-- Function name, hello
-- with Dockerfile path as source option
-
-After deployment completes, of course you can request to real deployed function!
-
--->
-
 ---
 
 <!-- _class: lead -->
 
 ![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/gcp_cloud_run.png)
-
-<!--
-
-You can find deployed function on GCP Cloud Run console.
-
--->
 
 ---
 
@@ -515,27 +282,11 @@ Deploy `hello` function to Cloud Run!
 
 ![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture_http_function_checked.png)
 
-<!--
-
-So, we've learned how to define HTTP function in Dart,
-
-using functions_framework package,
-
-and how to deploy functions on Cloud Run!
-
--->
-
 ---
 
 # dart_firebase_admin package
 
 ![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture_dart_firebase_admin.png)
-
-<!--
-
-As next step, let me introduce another important package dart_firebase_admin
-
--->
 
 ---
 
@@ -545,14 +296,6 @@ As next step, let me introduce another important package dart_firebase_admin
 - Remi is the main contributor
 
 ![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/dart_firebase_admin_card.png)
-
-<!--
-
-dart_firebase_admin package is developed by `invertase` organization.
-
-and Remi is the main contributor.
-
--->
 
 ---
 
@@ -573,16 +316,6 @@ final auth = Auth(adminApp);
 final messaging = Messaging(adminApp);
 ```
 
-<!--
-
-The usage is simple, you need to initialize `FirebaseAdminApp` by using your own credential,
-
-then you can instantiate various Firebase features
-
-such as Cloud Firestore, Firebase Auth, and Cloud Messaging.
-
--->
-
 ---
 
 Example: Send Cloud Messaging
@@ -602,14 +335,6 @@ Future<void> main async {
 }
 ```
 
-<!--
-
-As you can see, thanks firebase_admin package, you can write typical server-side processing,
-
-sending Cloud Messaging is available in Dart!
-
--->
-
 ---
 
 <!-- _class: lead -->
@@ -624,29 +349,11 @@ Send FCM to mobile app from local admin SDK!
 
 ![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture_dart_firebase_admin_checked.png)
 
-<!--
-
-We've learned the usage of dart_firebase_admin package.
-
--->
-
 ---
 
 # Transfer Cloud Firestore event to Cloud Run
 
 ![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture_eventarc.png)
-
-<!--
-
-There might not be many people who are familiar with Eventarc and CloudEvents,
-
-but this is an important part of this architecture.
-
-Let me explain how to transfer events occurred in Cloud Firestore to Cloud Run,
-
-by using GCP Eventarc service.
-
--->
 
 ---
 
@@ -655,20 +362,6 @@ by using GCP Eventarc service.
 ![bg right:40% 80%](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/eventarc.svg)
 
 > Eventarc lets you build **event-driven architectures** without having to implement, customize, or maintain the underlying infrastructure. **Eventarc offers a standardized solution to manage the flow of state changes, called events, between decoupled microservices.**
-
-<!--
-
-Eventarc is one of the services provided by GCP,
-
-which enables us to handle events ocurred between different microservices.
-
-So, in the today's sessions architecture, we will use Eventarc 
-
-to transfer Cloud Firestore triggered to Cloud Run function.
-
-This is how we realize Cloud Firestore triggered function.
-
--->
 
 ---
 
@@ -680,31 +373,11 @@ This is how we realize Cloud Firestore triggered function.
 >
 > CloudEvents seeks to dramatically simplify event declaration and delivery across services, platforms, and beyond!
 
-<!--
-
-And I need to explain CloudEvents now.
-
-CloudEvents is a specification for describing event data in a common way,
-
-so CloudEvents is not really directly related to GCP service,
-
-but as a common specification, Eventarc handles events occurred in GCP services,
-
-and transfer them to other services.
-
--->
-
 ---
 
 # Write CloudEvents triggered Function in Dart
 
 ![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture_firestore_triggered_function.png)
-
-<!--
-
-Finally, let's have look at how to write Firestore triggered function in Dart!
-
--->
 
 ---
 
@@ -722,25 +395,6 @@ void oncreateevent(CloudEvent event, RequestContext context)
 ```
 
 ⚠️ Only lowercase letters, numbers and '-' are allowed for function name.
-
-<!--
-
-Here, as well, we use functions_framework package.
-
-They provide the way to write not only HTTP function, 
-
-but also CloudEvents triggered function as well!
-
-With `@CloudFunction` annotation, you can write your own CloudEvents triggered function,
-
-with two parameters
-
-- 1st: CloudEvent
-- 2nd: RequestContext
-
-This is too simple, because it just returns "Hello, Flutter Ninjas!" message, but let's see more practical example later.
-
--->
 
 ---
 
@@ -767,16 +421,6 @@ EXPOSE 8080
 ENTRYPOINT ["/app/bin/server", "--target=oncreateevent", "--signature-type=cloudevent"]
 ```
 
-<!--
-
-In order to Deploy CloudEvents triggered Function on Cloud Run,
-
-its Dockerfile is almost the same as HTTP function.
-
-Only the difference is `signature-type` option, you need to specify `cloudevent` there at this time.
-
--->
-
 ---
 
 # Deploy Eventarc trigger
@@ -799,36 +443,11 @@ gcloud eventarc triggers create oncreateevent \  # Trigger name
   --service-account="your-service-account-name@project-id.iam.gserviceaccount.com"
 ```
 
-<!--
-
-Then, in order for the function to be triggered, you need to deploy Eventarc trigger to GCP.
-
-To do so, you can use `gcloud` CLI also here.
-
-The command you will use is `gcloud eventarc triggers create`.
-
-And give information such as 
-
-- Trigger name
-- Destination Cloud Run function (service) name
-- Event type, in this example, Cloud Firestore document creation
-- Target path, in this example, any document under events collection
-
--->
-
 ---
 
 <!-- _class: lead -->
 
 ![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/gcp_eventarc.png)
-
-<!--
-
-When the trigger is successfully deployed, you can find detailed information in GCP console.
-
-Information on the screenshot is corresponding to what we gave to the `gcloud` command.
-
--->
 
 ---
 
@@ -842,16 +461,6 @@ Deploy Eventarc trigger!
 
 ![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/architecture_firestore_triggered_function_checked.png)
 
-<!--
-
-So, now we've learned about Eventarc and how to transfer events from Cloud Firestore to Cloud Run function written in Dart.
-
-So we've learned almost everything we need to know about today.
-
-But...
-
--->
-
 ---
 
 # How to handle Raw CloudEvents data?
@@ -861,20 +470,6 @@ Request body is in `application/protobuf` byte data format:
 ```json
 [10, 195, 3, 10, 84, 112, 114, 111, 106, 101, 99, 116, 115, 47, 102, 117 ...]
 ```
-
-<!--
-
-But we still have a remaining question here.
-
-How can we handle Raw CloudEvents data?
-
-The request body comes to Cloud Run function as CloudEvents,
-
-is in `application/protobuf` byte data format, like you see on the screen.
-
-This is not understandable as it is, so we need to somehow prase the byte data to JSON.
-
--->
 
 ---
 
@@ -901,16 +496,6 @@ CloudEvents metadata found in header such as:
 }
 ```
 
-<!--
-
-And also the request header is a little complicated.
-
-The header data here on the screen is simplified for explanation, but it includes various metadata
-
-such as triggered document and triggered event type.
-
--->
-
 ---
 
 # firebase-functions (Node.js)
@@ -936,33 +521,11 @@ const onCreateTodo = functions
   })
 ```
 
-<!--
-
-Probably many of you have used them before, but
-
-When it comes to Node.js firebase-function package,
-
-just by writing such a simple code,
-
-they enable us to instantly use documentId from `context.params`,
-
-and also the provide triggered `DocumentSnapshot` data.
-
--->
-
 ---
 
 <!-- _class: lead -->
 
 # ![w:72 h:72](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/flutter_ninjas.png) Possible to write in Dart?
-
-<!--
-
-Is is possible in Dart?
-
-So I tried to make it possible in Dart!
-
--->
 
 ---
 
@@ -972,16 +535,6 @@ So I tried to make it possible in Dart!
 - Provides Node.js-like Firebase functions capability in Dart!
 
 ![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/dart_firebase_functions_card.png)
-
-<!--
-
-It's dart_firebase_functions package.
-
-Still in early stages, but I tried to develop and published it recently.
-
-This package provides Node.js-like Firebase functions capability in Dart!
-
--->
 
 ---
 
@@ -1025,24 +578,6 @@ const onCreateTodo = functions
 
 </div>
 
-<!--
-
-Let's see an example how to write `onCreate` trigger function, comparing to Node.js one.
-
-As you see, the left one is in Dart, and the right in Node.js.
-
-They look very similar to each other.
-
-My package allows you to use `OnDocumentCreated` annotation you can generate code by build_runner.
-
-Maybe in the near future, I'd like to make them compatible to Macro.
-
-In Dart function as well, you can get document ID from the `Record` typed params,
-
-and triggered `DocumentSnapshot` from the function parameter.
-
--->
-
 ---
 
 # onUpdate
@@ -1085,12 +620,6 @@ const onUpdateTodo = functions
     // ...
   })
 ```
-
-<!--
-
-For onUpdate trigger, you can get `before` and `after` data from the `DocumentSnapshot` in the exactly same way as the Node.js one.
-
--->
 
 </div>
 
@@ -1137,12 +666,6 @@ const onDeleteTodo = functions
 </div>
 
 </div>
-
-<!--
-
-On delete, ...
-
--->
 
 ---
 
@@ -1191,12 +714,6 @@ const onWriteTodo = functions
 
 </div>
 
-<!--
-
-And on write trigger as well!
-
--->
-
 ---
 
 # Nested Collection
@@ -1214,14 +731,6 @@ Future<void> oncreatebar(
   // ...
 }
 ```
-
-<!--
-
-And of course, it is possible to parse nested collection path like this.
-
-You can get both foo ID and bar ID from the `params`.
-
--->
 
 ---
 
@@ -1243,20 +752,6 @@ Generate code:
 ```sh
 dart pub run build_runner build -d
 ```
-
-<!--
-
-So we are finally able to write Firestore triggered function in Dart, 
-
-by using dart_firebase_function package, and for example `@OnDocumentCreated` annotation,
-
-which depends on functions_framework package inside,
-
-and of course, you can use Dart Firebase Admin SDK in the function,
-
-And generate code by build_runner
-
--->
 
 ---
 
@@ -1283,12 +778,6 @@ EXPOSE 8080
 ENTRYPOINT ["/app/bin/server", "--target=oncreateevent", "--signature-type=cloudevent"]
 ```
 
-<!--
-
-And the Dockerfile for deployment is completely the same as the one we saw before!
-
--->
-
 ---
 
 <!-- _class: lead -->
@@ -1296,12 +785,6 @@ And the Dockerfile for deployment is completely the same as the one we saw befor
 # ![w:72 h:72](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/flutter_ninjas.png) Final Demo
 
 Let's see sample app's server-side code!
-
-<!--
-
-As final demo, let's see the sample app's server-side code together!
-
--->
 
 ---
 
@@ -1313,23 +796,11 @@ As final demo, let's see the sample app's server-side code together!
 - Eventarc transfers CloudEvents from Cloud Firestore to Cloud Run
 - `dart_firebase_function` package provides Node.js-like Firebase functions capability in Dart
 
-<!--
-
-So let's summarize this session, important points are here:
-
--->
-
 ---
 
 # Explore Full-Stack Dart
 
 ![bg](https://cdn.kosukesaigusa.com/flutter-ninjas/assets/explore_full_stack_dart.png)
-
-<!--
-
-I hope you enjoyed exploring Full-Stack Dart for Firebase server-side processing!
-
--->
 
 ---
 
