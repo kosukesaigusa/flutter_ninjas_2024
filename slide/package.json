@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "PORT=8000 npx @marp-team/marp-cli -s . --theme-set ./styles/*.css --html",
     "preview": "PORT=8000 npx @marp-team/marp-cli -p . --theme-set ./styles/*.css --html",
-    "export": "npx @marp-team/marp-cli --pptx slide.md --theme-set ./styles/*.css --html"
+    "export:pptx": "npx @marp-team/marp-cli --pptx slide.md --theme-set ./styles/*.css --html",
+    "export:pdf": "npx @marp-team/marp-cli --pdf slide.md --theme-set ./styles/*.css --html"
   },
   "keywords": [],
   "author": "",
